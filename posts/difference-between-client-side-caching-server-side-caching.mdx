@@ -1,0 +1,85 @@
+---
+title: Difference between client-side caching and server-side caching + ExpressJS/Redis/MongoDB example.
+date: 'January 15, 2023'
+description: Learn the difference between client-side caching and server-side caching with an example of server-side caching using Redis & MongoDB through an NodeJS server.
+author: 'Khaled Sanny A.'
+authorPhotoUrl: '/assets/khaled_sanny.jpg'
+thumbnailUrl: '/assets/server-side-cache.webp'
+tags: ['Caching', 'Strategies', 'ExpressJS']
+---
+
+Client-side caching and server-side caching are two different ways to implement caching in a system. The main difference between the two is where the cache is stored and who is responsible for managing it.
+
+Client-side caching, also known as browser caching, is when the cache is stored on the client's device, typically in the browser's memory or on the client's hard drive. This type of caching is typically managed by the browser and is controlled by headers sent by the server with each response. These headers can specify how long the browser should cache the response, and the browser will use this information to determine when to retrieve a new copy of the response from the server.
+
+Server-side caching, on the other hand, is when the cache is stored on the server. This type of caching is typically managed by the server-side application or a separate caching server. The server-side application is responsible for storing the data in the cache and for controlling how long the data is cached. Server-side caching can be done in different ways, but the most common one is using in-memory caches like Memcached, Redis. In this case, the server side application communicates with the caching server, to check if the data exists and if not it will fetch it from the origin source like database and store it in the cache.
+
+Both client-side caching and server-side caching can be useful for improving the performance of a system, but they have different strengths and weaknesses.
+
+Client-side caching can be useful for reducing the number of requests that need to be made to the server, which can save bandwidth and reduce the load on the server. However, it can be less reliable than server-side caching, since the client's browser may not always implement caching correctly or may choose to ignore the cache headers.
+
+Server-side caching, on the other hand, is more reliable and provides more control over how data is cached. But it also needs a caching infrastructure and additional communication between the application and caching server.
+
+In general, server-side caching is often preferred for more complex or business-critical systems that need a higher degree of control over the caching process, while client-side caching is often used to supplement server-side caching and improve performance on the client side.
+
+---
+
+Here is an example of ExpressJS backend code that uses MongoDB to store data and Redis to handle caching. This example uses the mongoose library to interact with MongoDB and the redis library to interact with Redis.
+
+<SyntaxHighlighter language='javascript'>
+  {`
+    const express = require('express');
+    const mongoose = require('mongoose');
+    const redis = require('redis');
+
+    const app = express();
+
+    // Connect to MongoDB
+    mongoose.connect('mongodb://localhost/mydb', { useNewUrlParser: true });
+
+    // Connect to Redis
+    const redisClient = redis.createClient();
+    redisClient.on('connect', () => {
+      console.log('Connected to Redis');
+    });
+
+    // Define a MongoDB model for the data
+    const DataModel = mongoose.model('Data', {
+      name: String,
+      value: String,
+    });
+
+    // Middleware to handle caching
+    app.use((req, res, next) => {
+      const key = req.originalUrl; // Use the request URL as the cache key
+      redisClient.get(key, (err, data) => {
+        if (err) throw err;
+        if (data) {
+          // If the data is in the cache, return it
+          res.json(JSON.parse(data));
+        } else {
+          // If the data is not in the cache, retrieve it from MongoDB
+          DataModel.findOne({ name: req.query.name }, (err, data) => {
+            if (err) throw err;
+            // Store the data in the cache for 1 hour
+            redisClient.set(key, JSON.stringify(data), 'EX', 3600);
+            res.json(data);
+          });
+        }
+      });
+    });
+
+    app.listen(3000, () => {
+      console.log('Server started on port 3000');
+    });
+
+`}
+
+</SyntaxHighlighter>
+
+This code sets up an ExpressJS server that uses MongoDB as its primary data store and Redis as a caching layer. It defines a Mongoose model DataModel that represents the data in the MongoDB collection. It also sets up a middleware function that intercepts all requests and checks for the data in the Redis cache. If the data is found in the cache, it is returned to the client, otherwise it is retrieved from MongoDB and stored in the cache for 1 hour.
+
+In this example, the cache key is the original URL of the request, this way we can cache the response for each unique request, but you can also use other unique keys like an id, token, or even query parameters.
+It is worth noting that this is just an example and there are many other things to consider when building a production-ready application, like error handling, security, scaling, and more. Additionally, the data and the ttl in the cache also needs to be invalidated based on the application requirements and use-cases.
+
+That is it, now you know is the difference between client-side caching and server-side caching and have an example server-side caching using Redis & MongoDB.
