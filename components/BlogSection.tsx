@@ -23,7 +23,7 @@ export default function Blog({ posts }: BlogPosts) {
       )}
       <Link
         href='/blog'
-        className='group flex text-sm text-gray-500 transition-colors hover:text-white items-center'
+        className='group flex text-sm text-gray-500 dark:text-gray-600 transition-colors dark:hover:text-white hover:text-gray-700  items-center'
       >
         See more posts
         <svg
