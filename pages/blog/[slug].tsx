@@ -13,7 +13,7 @@ export default function Post({
 }: any) {
   return (
     <Layout title={title}>
-      <h1 className='text-center font-montserratAlt text-4xl sm:text-5xl font-semibold my-8 mb-4'>
+      <h1 className='text-center font-montserratAlt text-2xl sm:text-5xl font-semibold my-8 mb-4'>
         {title}
       </h1>
       <p className='text-center text-base max-w-lg mx-auto text-gray-500 mb-4'>
