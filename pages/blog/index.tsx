@@ -15,8 +15,8 @@ export default function Blog({ posts }: BlogPosts) {
       <section className='pb-12 mt-16'>
         {posts.length !== 0 && (
           <>
-            {posts.slice(0, 3).map((post) => (
-              <PostCard post={post} />
+            {posts.slice(0, 3).map((post, idx) => (
+              <PostCard key={post.frontMatter.title + idx} post={post} />
             ))}
           </>
         )}

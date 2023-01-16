@@ -34,7 +34,7 @@ export default function NotFound() {
           </h1>
 
           <p className='mt-4 dark:text-gray-500 text-gray-600'>
-            We can't find that page.
+            We cannot find that page.
           </p>
           <Link href='/'>
             <button className='p-2 px-3 mt-4 rounded-md dark:bg-white/10 dark:hover:bg-white/20 bg-zinc-700 hover:bg-zinc-800  text-white'>

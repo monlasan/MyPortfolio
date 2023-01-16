@@ -19,17 +19,29 @@ export default function Footer() {
       </ul>
 
       <ul className='flex items-center dark:text-zinc-100 text-zinc-700 gap-1'>
-        <a href='https://github.com/monlasan' target='_blank' rel='noopener'>
+        <a
+          href='https://github.com/monlasan'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
           <li className='hover:bg-zinc-100 transition-colors hover:dark:bg-zinc-800 p-2 rounded-full'>
             <FiGithub size={20} />
           </li>
         </a>
-        <a href='https://t.me/khaled_sama' target='_blank' rel='noopener'>
+        <a
+          href='https://t.me/khaled_sama'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
           <li className='hover:bg-zinc-100 transition-colors hover:dark:bg-zinc-800 p-2 rounded-full'>
             <FaTelegramPlane size={20} />
           </li>
         </a>
-        <a href='khaledsannyaml@gmail.com' target='_blank' rel='noopener'>
+        <a
+          href='khaledsannyaml@gmail.com'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
           <li className='hover:bg-zinc-100 transition-colors hover:dark:bg-zinc-800 p-2 rounded-full'>
             <FiMail size={20} />
           </li>
