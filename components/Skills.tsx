@@ -12,24 +12,30 @@ export default function Skills() {
           <li>Html</li>
           <li>Css / Scss</li>
           <li>Javascript</li>
+          <li>Typescript</li>
           <li>Php</li>
-          <li>Git</li>
         </ul>
         <ul className='relative grid gap-2 '>
           <span className='absolute -top-5 -left-5 block w-3 h-3 bg-cyan-500 rounded-full'></span>
-          <li>React JS</li>
+          <li>ReactJS</li>
+          <li>VueJS</li>
+          <li>NextJS</li>
+          <li>NuxtJS</li>
           <li>TailwindCSS</li>
-          <li>Node JS</li>
-          <li>MongoDB</li>
-          <li>MySQL</li>
         </ul>
         <ul className='relative grid gap-2 '>
           <span className='absolute -top-5 -left-5 block w-3 h-3 bg-cyan-500 rounded-full'></span>
-          <li>Wordpress</li>
+          <li>MySQL</li>
+          <li>MongoDB</li>
+          <li>Node JS</li>
           <li>Figma</li>
-          <li>Affinity Designer</li>
           <li>Adobe XD</li>
+        </ul>
+        <ul className='relative grid gap-2 '>
+          <span className='absolute -top-5 -left-5 block w-3 h-3 bg-cyan-500 rounded-full'></span>
+          <li>Affinity Designer</li>
           <li>Adobe Photoshop</li>
+          <li>Wordpress</li>
         </ul>
       </div>
     </section>
