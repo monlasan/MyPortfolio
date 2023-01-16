@@ -9,7 +9,7 @@ import Skills from '@/components/Skills';
 
 export default function Home({ posts }: BlogPosts) {
   return (
-    <Layout title='Sanny Khaled'>
+    <Layout title='Khaled Sanny'>
       <Who />
       <BlogSection posts={posts} />
       <Skills />
